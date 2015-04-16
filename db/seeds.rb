@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+if Rails.env.development?
+  u = LegacyUser.where({
+      first_name: 'Test', last_name: 'McGee', login: 'test',
+      active: true, email: 'test@test.com'
+  }).first_or_create do |user|
+    user.password = 'test'
+    user.password_confirmation = 'test'
+  end
+end

@@ -1,0 +1,20 @@
+%p#notice= notice
+%h1 Listing Identities
+%table
+  %thead
+    %tr
+      %th Name
+      %th Email
+      %th Password digest
+      %th{:colspan => "3"}
+  %tbody
+    - @identities.each do |identity|
+      %tr
+        %td= identity.name
+        %td= identity.email
+        %td= identity.password_digest
+        %td= link_to 'Show', identity
+        %td= link_to 'Edit', edit_identity_path(identity)
+        %td= link_to 'Destroy', identity, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Identity', new_identity_path

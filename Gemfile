@@ -1,10 +1,16 @@
 source 'https://rubygems.org'
 
+gem 'bundler', '>= 1.8.4'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-font-awesome'
+end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -41,21 +47,23 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'pry'
+  gem 'better_errors', group: :development
+  gem 'guard'
+  gem 'guard-minitest'
+  gem 'terminal-notifier-guard'
+  gem 'quiet_assets'
 end
 
 
 gem 'haml'
 gem 'stamp'
-group :development, :test do
-  gem 'pry'
-  gem 'better_errors', group: :development
-  gem 'guard'
-  gem 'guard-minitest'
-end
 
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-openid'
+gem 'omniauth-identity'
 gem 'google-api-client'
-gem 'bower-rails'
+gem 'bootstrap_form'
+gem 'jquery-turbolinks'

@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414181559) do
+ActiveRecord::Schema.define(version: 20150416023108) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"
@@ -19,6 +22,26 @@ ActiveRecord::Schema.define(version: 20150414181559) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "identities", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "legacy_users", force: :cascade do |t|
+    t.string   "login"
+    t.string   "email"
+    t.string   "crypted_password"
+    t.string   "salt"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.boolean  "active"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -32,8 +55,11 @@ ActiveRecord::Schema.define(version: 20150414181559) do
     t.string   "name"
     t.string   "email"
     t.string   "avatar"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "password_digest"
+    t.string   "reset_code"
+    t.boolean  "force_password_reset"
   end
 
 end

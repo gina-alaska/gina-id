@@ -1,0 +1,7 @@
+- if @user.identity.nil?
+  .panel.panel-default
+    .panel-heading
+      %h1.panel-title Add password to account
+    .panel-body
+      %h4 There is no password associated with this account.
+      = render 'identities/add_identity_form', name: @user.name, email: @user.email

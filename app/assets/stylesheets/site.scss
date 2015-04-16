@@ -1,0 +1,17 @@
+.flash-messages {
+  top: 60px;
+  right: 10px;
+  z-index: 10000;
+  position: absolute;
+  .alert {
+    min-width: 200px;
+    margin-bottom: 8px;
+  }
+  .close {
+    margin-left: 20px;
+  }
+}
+
+.google-signin {
+  img { max-height: 50px; }
+}

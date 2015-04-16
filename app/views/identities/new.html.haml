@@ -1,0 +1,10 @@
+.row
+  .col-sm-6
+    .panel.panel-default
+      .panel-heading
+        %h1.panel-title Create a new account
+      .panel-body
+        = render 'form'
+
+  .col-sm-6
+    = render 'sessions/google_auth'

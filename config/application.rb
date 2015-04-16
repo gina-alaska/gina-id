@@ -5,6 +5,7 @@ require 'rails/all'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+require File.expand_path('../../lib/omniauth_strategies', __FILE__)
 
 module Webauthserver
   class Application < Rails::Application

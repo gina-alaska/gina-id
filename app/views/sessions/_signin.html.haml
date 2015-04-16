@@ -1,0 +1,20 @@
+%h4
+  Don't use these services?
+  = link_to "Create an account", new_identity_path
+  or sign in below.
+%br/
+.row
+  .col-sm-6
+    .panel.panel-default
+      .panel-heading
+        %h1.panel-title Sign in using GINA::ID
+      .panel-body
+        = bootstrap_form_tag url:"/auth/identity/callback" do |f|
+          = f.text_field :auth_key, label: 'Email'
+          = f.password_field :password
+          .actions
+            = link_to 'Forgot password?', forgot_password_user_path, class: 'btn btn-default'
+            .pull-right
+              = f.primary 'Login'
+  .col-sm-6
+    = render 'sessions/google_auth'

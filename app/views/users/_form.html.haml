@@ -1,0 +1,10 @@
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Account info
+  .panel-body
+    = bootstrap_form_for @user, url: user_path do |f|
+      = f.text_field :name
+      = f.text_field :email
+
+      .text-right
+        = f.primary 'Update account info'

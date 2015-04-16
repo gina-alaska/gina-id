@@ -1,0 +1,12 @@
+- unless @user.google_identity?
+  .panel.panel-default
+    .panel-heading
+      %h1.panel-title Link Google account
+    .panel-body
+      %p If you wish to link your Google account into your GINA::ID identity click the button below.
+
+      %P When asked to authorize access to your account click the "Accept" button.
+
+      .google-signin.text-center
+        = link_to '/auth/google' do
+          = image_tag 'red_google_signin'

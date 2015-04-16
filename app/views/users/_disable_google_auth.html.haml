@@ -1,0 +1,7 @@
+- if @user.google_identity? && @user.authorizations.count != 1
+  .panel.panel-default
+    .panel-heading
+      %h1.panel-title Unlink Google account
+    .panel-body
+      = link_to '/auth/google/disable', class: 'btn btn-danger btn-block', data: { confirm: 'Are you sure?' } do
+        Click here to unlink your Google account
