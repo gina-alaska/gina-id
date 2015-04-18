@@ -1,11 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  provider: identity
-  uid: 1
-  user: one
+  request: MyText
 
 two:
-  provider: MyString
-  uid: MyString
-  user_id: 1
+  request: MyText

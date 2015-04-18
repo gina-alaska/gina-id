@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
   include GinaAuthentication::Users
 
-  def show
+  def index
     return redirect_to root_url unless signed_in?
 
     save_current_location
     @user = current_user
-    render 'edit'
   end
 
   def forgot_password
@@ -17,10 +16,11 @@ class UsersController < ApplicationController
 
     if @user.nil? or @user.identity.nil?
       flash[:error] = 'Not account was found with that email address'
-      redirect_to forgot_password_user_path
+      redirect_to forgot_password_users_path
     else
       @user.create_password_reset_code!
-      UserMailer.reset_password(@user, reset_password_user_url(reset_code: @user.reset_code)).deliver_later
+      reset_url = reset_password_users_url(reset_code: @user.reset_code)
+      UserMailer.reset_password(@user, reset_url).deliver_later
       redirect_to root_path, notice: "An email has been sent to #{params[:email]} with instructions for resettting your password"
     end
   end
@@ -43,8 +43,13 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update_attributes(user_params)
         @user.clear_password_reset_code!
+
+        if @user.identity.previous_changes['password_digest'].present?
+          UserMailer.password_update_notification(@user, root_url).deliver_later
+        end
+
         flash[:success] = "Successfully updated account info"
-        format.html { redirect_to user_path }
+        format.html { redirect_to users_path }
       else
         format.html { render 'edit' }
       end

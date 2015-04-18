@@ -46,7 +46,7 @@ module GinaAuthentication
     def identity
       return nil unless auth = authorizations.where(provider: 'identity').first
 
-      Identity.find(auth.uid)
+      @identity ||= Identity.find(auth.uid)
     end
 
     def google_identity?

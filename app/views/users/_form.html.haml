@@ -2,7 +2,7 @@
   .panel-heading
     %h1.panel-title Account info
   .panel-body
-    = bootstrap_form_for @user, url: user_path do |f|
+    = bootstrap_form_for @user do |f|
       = f.text_field :name
       = f.text_field :email
 

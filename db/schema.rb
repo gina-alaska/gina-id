@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416023108) do
+ActiveRecord::Schema.define(version: 20150418002326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "approvals", force: :cascade do |t|
+    t.text     "trust"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "approvals", ["user_id"], name: "index_approvals_on_user_id", using: :btree
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"
@@ -51,6 +60,12 @@ ActiveRecord::Schema.define(version: 20150416023108) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "oid_requests", force: :cascade do |t|
+    t.text     "request"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -60,6 +75,8 @@ ActiveRecord::Schema.define(version: 20150416023108) do
     t.string   "password_digest"
     t.string   "reset_code"
     t.boolean  "force_password_reset"
+    t.string   "activation_code"
   end
 
+  add_foreign_key "approvals", "users"
 end

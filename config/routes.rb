@@ -8,13 +8,26 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'sessions#failure'
   get '/settings', to: 'users#show'
 
-  resources :sessions
-  resources :memberships
-  resource :user do
-    get :forgot_password
-    post :send_reset_instructions
-    get :reset_password
+  resources :sessions do
+    get :activate, on: :collection
   end
+  resources :memberships
+
+  #open id server routes
+  resources :servers, path: :openid, except: [:new, :edit, :update, :destroy] do
+    get :xrds, on: :collection
+    get :xrds, on: :member
+    post :decision, on: :collection
+  end
+  resources :users do
+    get :xrds, on: :member
+    collection do
+      get :forgot_password
+      post :send_reset_instructions
+      get :reset_password
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

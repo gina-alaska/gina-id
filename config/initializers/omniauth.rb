@@ -10,6 +10,9 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     # prompt: 'consent'
   }
   provider :identity, fields: [:email, :name],
+                      on_registration: ->(env) {
+                        IdentitiesController.action(:new).call(env)
+                      },
                       on_failed_registration: ->(env) {
                         IdentitiesController.action(:new).call(env)
                       }

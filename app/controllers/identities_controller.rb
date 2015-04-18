@@ -1,16 +1,10 @@
 class IdentitiesController < ApplicationController
-  before_action :set_identity, only: [:show, :edit, :update, :destroy]
-
-  # GET /identities
-  # GET /identities.json
-  def index
-    @identities = Identity.all
-  end
+  before_action :set_identity, only: [:destroy]
 
   # GET /identities/new
   def new
     # @identity = Identity.new
-    @identity = env['omniauth.identity']
+    @identity = env['omniauth.identity'] || Identity.new
   end
 
   # DELETE /identities/1
@@ -21,6 +15,14 @@ class IdentitiesController < ApplicationController
       format.html { redirect_to identities_url, notice: 'Identity was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def create
+    # NOTE: this gets called after omniauth-identity has created our information
+    @identity = env['omniauth.identity'] || Identity.new
+
+    UserMailer.new_user_notifications(@identity).deliver_later
+    redirect_to root_url
   end
 
   private

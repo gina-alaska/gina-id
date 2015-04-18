@@ -1,11 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  provider: identity
-  uid: 1
-  user: one
+  trust: MyText
+  user_id: 
 
 two:
-  provider: MyString
-  uid: MyString
-  user_id: 1
+  trust: MyText
+  user_id: 

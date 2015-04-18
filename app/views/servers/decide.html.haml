@@ -1,0 +1,22 @@
+
+= bootstrap_form_tag url: decision_servers_url do |f|
+  %table
+    %tr
+      %td Site:
+      %td= @oidreq.trust_root
+    - if @oidreq.id_select
+      %tr
+        %td{:colspan => "2"}
+          You entered the server identifier at the relying party.
+          You'll need to send an identifier of your choosing.  Enter a
+          username below.
+      %tr
+        %td Identity to send:
+        %td
+          %input{:name => "id_to_send", :size => "25", :type => "text"}/
+    - else
+      %tr
+        %td Identity:
+        %td= @oidreq.identity
+  %input{:name => "yes", :type => "submit", :value => "yes"}/
+  %input{:name => "no", :type => "submit", :value => "no"}/

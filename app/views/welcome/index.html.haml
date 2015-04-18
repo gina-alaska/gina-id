@@ -1,13 +1,14 @@
-%h2 Welcome to GINA::ID
-- if current_user.guest?
-  = render 'sessions/signin'
-- else
-  %h3
-    Hello #{current_user.name}
-    %small (Not #{current_user.name}, click #{link_to "here", signout_path})
+.row
+  .col-md-8.col-md-offset-2
+    %h2 Welcome to GINA::ID
+    - if current_user.guest?
+      = render 'sessions/signin'
+    - else
+      %h3
+        Hello #{current_user.name}
+        %small (Not #{current_user.name}, click #{link_to "here", signout_path})
 
-  .panel.panel-default
-    .panel-heading
-      %h1.panel-title Login information
-    .panel-body
-      If you where attempting login to a different website
+      - if current_user.activated?
+        = render 'access_gina_services'
+      - else
+        = render 'activation_message'

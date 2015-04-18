@@ -9,6 +9,14 @@ module GinaAuthentication
       validates_uniqueness_of :uid, :scope => :provider
     end
 
+    def new_user?
+      !!@new_user
+    end
+
+    def new_user=(value)
+      @new_user = value
+    end
+
     module ClassMethods
       def find_from_hash(hash)
         where(provider: hash['provider'], uid: hash['uid']).first
@@ -21,7 +29,10 @@ module GinaAuthentication
         #   user.update_from_hash!(hash)
         end
 
-        create(:user => user, :uid => hash['uid'], :provider => hash['provider'])
+        auth = create(:user => user, :uid => hash['uid'], :provider => hash['provider'])
+        auth.new_user = true
+
+        auth
       end
     end
   end
