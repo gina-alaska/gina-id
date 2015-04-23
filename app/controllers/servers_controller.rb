@@ -113,8 +113,6 @@ EOS
     render :text => identity_page
   end
 
-  protected
-
   def user_xrds
     types = [
              OpenID::OPENID_2_0_TYPE,

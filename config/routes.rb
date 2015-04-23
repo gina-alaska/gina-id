@@ -20,7 +20,6 @@ Rails.application.routes.draw do
     post :decision, on: :collection
   end
   resources :users do
-    get :xrds, on: :member
     get :confirm_migration, on: :member
 
     collection do
