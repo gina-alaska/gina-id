@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   end
   resources :users do
     get :xrds, on: :member
+    get :confirm_migration, on: :member
+
     collection do
       get :forgot_password
       post :send_reset_instructions

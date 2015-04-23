@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   end
 
   def legacy_user
-    @legacy_user ||= LegacyUser.where(email: email).first
+    @legacy_user ||= LegacyUser.where(email: email, active: true).first
   end
 
   def self.create_from_legacy_user(legacy_user)

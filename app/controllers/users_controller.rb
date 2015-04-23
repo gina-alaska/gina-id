@@ -67,6 +67,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def confirm_migration
+    @user = current_user
+
+    @user.legacy_user.update_attribute(:active, false)
+
+    redirect_to root_url
+  end
+
   private
 
   def legacy_user(email)

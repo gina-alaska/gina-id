@@ -8,8 +8,9 @@
       We've recently upgraded the GINA::ID application with a new more secure account managmenet system.
 
     %p
-      As part of the upgrade your account was automatically migrated, if you encounter any problems using the new system please #{mail_to 'support@gina.alaska.edu', 'send us an email'} with a short description of the problem.
+      As part of the upgrade your account was automatically migrated and no futher actions are required.
+      If you encounter any problems, please #{mail_to 'support@gina.alaska.edu', 'email us at support@gina.alaska.edu'} and include description of the problem and what you were attempting to do when the problem occured.
 
     .text-right
-      = link_to '#', class: 'btn btn-primary' do
+      = link_to confirm_migration_user_path(current_user), class: 'btn btn-primary' do
         Dismiss notice
