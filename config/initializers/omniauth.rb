@@ -6,7 +6,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     name: "google",
     scope: "email, profile",
     image_aspect_ratio: "square",
-    image_size: 50# ,
+    image_size: 50,
+    openid_realm: 'https://id.gina.alaska.edu'# ,
     # prompt: 'consent'
   }
   provider :identity, fields: [:email, :name],
