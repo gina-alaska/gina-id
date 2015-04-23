@@ -14,15 +14,21 @@ class UsersController < ApplicationController
   def send_reset_instructions
     @user = User.where('email ilike :email', email: params[:email]).first
 
-    if @user.nil? or @user.identity.nil?
-      flash[:error] = 'Not account was found with that email address'
-      redirect_to forgot_password_users_path
-    else
-      @user.create_password_reset_code!
-      reset_url = reset_password_users_url(reset_code: @user.reset_code)
-      UserMailer.reset_password(@user, reset_url).deliver_later
-      redirect_to root_path, notice: "An email has been sent to #{params[:email]} with instructions for resettting your password"
+    if @user.nil? && (legacy = legacy_user(params[:email]))
+      @user = User.create_from_legacy_user(legacy)
     end
+
+    if @user.present?
+      if @user.identity.present?
+        @user.create_password_reset_code!
+        reset_url = reset_password_users_url(reset_code: @user.reset_code)
+        UserMailer.reset_password(@user, reset_url).deliver_later
+      else
+        # TODO: Add instructions for users that don't have a password
+      end
+    end
+
+    redirect_to root_path, notice: "An email will be sent to #{params[:email]} with instructions for resetting your password"
   end
 
   def reset_password
@@ -42,10 +48,15 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(user_params)
-        @user.clear_password_reset_code!
-
-        if @user.identity.previous_changes['password_digest'].present?
+        if @user.identity && @user.identity.previous_changes['password_digest'].present?
+          @user.clear_password_reset_code!
           UserMailer.password_update_notification(@user, root_url).deliver_later
+        end
+
+        if @user.previous_changes['email'].present?
+          url = activate_sessions_url(code: @user.activation_code)
+          UserMailer.email_confirmation(@user, url).deliver_later
+          flash[:notice] = "An email has been sent to #{@user.email} to confirm you new address"
         end
 
         flash[:success] = "Successfully updated account info"
@@ -57,6 +68,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def legacy_user(email)
+    LegacyUser.where('email ilike :email', email: email).first
+  end
 
   def reset_code_user
     return nil unless reset_code_given?

@@ -92,10 +92,8 @@ EOS
     case web_response.code
     when HTTP_OK
       render :text => web_response.body, :status => 200
-
     when HTTP_REDIRECT
       redirect_to web_response.headers['location']
-
     else
       render :text => web_response.body, :status => 400
     end

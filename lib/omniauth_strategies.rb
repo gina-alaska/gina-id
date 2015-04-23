@@ -1,7 +1,7 @@
 class OmniAuth::Strategies::Identity
   def callback_phase
     # attempt to upgrade credentials
-    upgrade_identity if !record.present?
+    upgrade_identity if record.nil?
 
     return fail!(:invalid_credentials) unless identity
     super

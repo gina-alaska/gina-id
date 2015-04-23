@@ -1,0 +1,15 @@
+.panel.panel-warning.lead
+  .panel-heading
+    %h1.panel-title
+      %strong NOTICE:
+      Recent changes to GINA::ID
+  .panel-body
+    %p
+      We've recently upgraded the GINA::ID application with a new more secure account managmenet system.
+
+    %p
+      As part of the upgrade your account was automatically migrated, if you encounter any problems using the new system please #{mail_to 'support@gina.alaska.edu', 'send us an email'} with a short description of the problem.
+
+    .text-right
+      = link_to '#', class: 'btn btn-primary' do
+        Dismiss notice

@@ -7,7 +7,7 @@ class ServersHelperTest < ActionView::TestCase
   end
 
   test "should return url for user" do
-    assert_equal "/servers/#{@user.id}", url_for_user
+    assert_equal "http://test.host/openid/#{@user.id}", url_for_user
   end
 
   def current_user

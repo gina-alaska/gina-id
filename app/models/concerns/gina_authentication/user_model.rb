@@ -22,6 +22,10 @@ module GinaAuthentication
       self.update_attributes(reset_code: nil, force_password_reset: false)
     end
 
+    def force_password_reset!
+      self.update_attribute(:force_password_reset, true)
+    end
+
     def current_password_matches
       return if current_password.blank? or identity.nil?
 

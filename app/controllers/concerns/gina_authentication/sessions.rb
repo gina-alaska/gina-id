@@ -21,7 +21,7 @@ module GinaAuthentication
         @auth = Authorization.create_from_hash(auth_hash, current_user)
       end
 
-      if @auth.new_user?
+      if @auth.new_user? && @auth.user.legacy_user.nil?
         UserMailer.new_user_notification(@auth.user).deliver_later
         if params[:provider] == 'identity'
           url = activate_sessions_url(code: @auth.user.activation_code)

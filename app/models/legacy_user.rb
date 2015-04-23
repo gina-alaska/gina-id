@@ -3,7 +3,7 @@ class LegacyUser < ActiveRecord::Base
 
   validates :login, uniqueness: true
   validates :email, uniqueness: true
-  validates :password, presence: true, confirmation: true
+  validates :password, confirmation: true
 
   before_save :encrypt_password
 

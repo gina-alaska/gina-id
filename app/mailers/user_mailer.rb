@@ -24,4 +24,10 @@ class UserMailer < ApplicationMailer
     @url = url
     mail(to: user.email, subject: "[GINA::ID] Your password has been changed")
   end
+
+  def email_confirmation(user, activation_url)
+    @activation_url = activation_url
+    @user = user
+    mail(to: user.email, subject: "[GINA::ID] New email confirmation")
+  end
 end

@@ -1,22 +1,26 @@
-.panel.panel-warning
-  .panel-heading
-    %h1.panel-title You account needs to be activated
-  .panel-body.lead
-    %p
-      If you have just signed up for a new account you should receive an email shortly.
+.row
+  .col-sm-6
+    .panel.panel-danger
+      .panel-heading
+        %h1.panel-title You account needs to be activated
+      .panel-body.lead
+        %p
+          If you have just signed up for a new account you should receive an email shortly.
 
-    %p
-      You will need to follow the instructions in the activation email before you can sign into other GINA services with this account.
+        %p
+          You will need to follow the instructions in the activation email before you can sign into other GINA services with this account.
 
-.panel.panel-info
-  .panel-heading
-    %h1.panel-title Problems activating our account?
-  .panel-body
-    %h3 I haven't received an email asking to activate my account
-    %p.lead Check your spam filter or folder and make sure that support@gina.alaska.edu is allowed to send you email.
 
-    %h3 I need to change my emails address
-    %p.lead You register with #{current_user.email}, #{link_to 'Click here to change your settings', users_path}
+  .col-sm-6
+    .panel.panel-info
+      .panel-heading
+        %h1.panel-title Problems activating our account?
+      .panel-body
+        %h4 I haven't received an email asking to activate my account
+        %p Check your spam filter or folder and make sure that support@gina.alaska.edu is allowed to send you email.
 
-    %h3 I'm still having trouble
-    %p.lead If you're still having problems activating your account please send an email to #{mail_to 'support@gina.alaska.edu', 'support@gina.alaska.edu', target: :_blank}
+        %h4 I need to change my emails address
+        %p You register with #{current_user.email}, #{link_to 'Click here to change your settings', users_path}
+
+        %h4 I'm still having trouble
+        %p If you're still having problems activating your account please send an email to #{mail_to 'support@gina.alaska.edu', 'support@gina.alaska.edu', target: :_blank}

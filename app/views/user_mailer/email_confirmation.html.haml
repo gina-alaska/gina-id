@@ -1,0 +1,16 @@
+%h1 Geographic Information Network of Alaska
+
+%p You are receiving this message because your email address was recently updated, please click the following link to confirm this change.
+
+%p
+  = link_to @activation_url, @activation_url
+
+%p
+  If you did not request this password change or believe you're receiving this
+  email in error, please contact #{mail_to 'support@gina.alaska.edu'} for
+  immediate assistance.
+
+%p
+  The GINA Team
+  %br/
+  = link_to 'https://www.gina.alaska.edu', 'https://www.gina.alaska.edu'
