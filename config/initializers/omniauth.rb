@@ -7,7 +7,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     scope: "email, profile",
     image_aspect_ratio: "square",
     image_size: 50,
-    openid_realm: 'https://id.gina.alaska.edu'# ,
+    openid_realm: Rails.application.secrets.openid_realm# ,
     # prompt: 'consent'
   }
   provider :identity, fields: [:email, :name],

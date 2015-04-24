@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/zquestz/omniauth-google-oauth2.git
+  revision: 8ff9c8cffd36ddffaa0553da6b1d70475b72f52b
+  specs:
+    omniauth-google-oauth2 (0.2.6)
+      jwt (~> 1.0)
+      multi_json (~> 1.3)
+      omniauth (>= 1.1.1)
+      omniauth-oauth2 (>= 1.1.1)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -158,9 +168,6 @@ GEM
     omniauth-github (1.1.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
-    omniauth-google-oauth2 (0.2.6)
-      omniauth (> 1.0)
-      omniauth-oauth2 (~> 1.1)
     omniauth-identity (1.1.1)
       bcrypt-ruby (~> 3.0)
       omniauth (~> 1.0)
@@ -285,7 +292,7 @@ DEPENDENCIES
   jquery-turbolinks
   omniauth
   omniauth-github
-  omniauth-google-oauth2
+  omniauth-google-oauth2!
   omniauth-identity
   omniauth-openid
   pg

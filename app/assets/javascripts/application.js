@@ -16,3 +16,6 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+//= require_self
+
+Turbolinks.enableProgressBar()

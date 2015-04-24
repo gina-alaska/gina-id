@@ -8,6 +8,7 @@ module GinaAuthentication
     end
 
     def create
+      logger.info auth_hash[:extra][:id_info][:openid_id]
       if @auth = Authorization.find_from_hash(auth_hash)
         # Update a user with any new identify information
         # @auth.user.update_from_hash!(auth_hash)
