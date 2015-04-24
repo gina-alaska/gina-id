@@ -54,7 +54,8 @@ class UsersController < ApplicationController
         end
 
         if @user.previous_changes['email'].present?
-          url = activate_sessions_url(code: @user.activation_code)
+          @user.verify!
+          url = verify_sessions_url(code: @user.activation_code)
           UserMailer.email_confirmation(@user, url).deliver_later
           flash[:notice] = "An email has been sent to #{@user.email} to confirm you new address"
         end

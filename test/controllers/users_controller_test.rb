@@ -5,6 +5,15 @@ class UsersControllerTest < ActionController::TestCase
   #   assert true
   # end
 
+  test "updating user email should trigger verification" do
+    login_user(:one)
+
+    put :update, id: users(:one).id, user: { email: 'asdasdf@asdfasdf.com' }
+
+    assert_not assigns(:user).verified?
+    assert_not_nil assigns(:user).activation_code
+  end
+
   test "should get index for logged in user" do
     login_user(:one)
     get :index

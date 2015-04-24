@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/settings', to: 'users#show'
 
   resources :sessions do
-    get :activate, on: :collection
+    get :verify, on: :collection
   end
   resources :memberships
 

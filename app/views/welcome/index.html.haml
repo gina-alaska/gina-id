@@ -11,7 +11,7 @@
       - if current_user.legacy_user.present?
         = render 'user_upgrade_notice'
 
-      - if current_user.activated?
+      - if current_user.verified?
         = render 'access_gina_services'
       - else
         = render 'activation_message'
