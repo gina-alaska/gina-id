@@ -1,16 +1,17 @@
-.panel.panel-warning.lead
-  .panel-heading
-    %h1.panel-title
-      %strong NOTICE:
-      Recent changes to GINA::ID
-  .panel-body
-    %p
-      We've recently upgraded the GINA::ID application with a new more secure account management system.
+- if current_user.legacy_user.try(:active)
+  .panel.panel-warning.lead
+    .panel-heading
+      %h1.panel-title
+        %strong NOTICE:
+        Recent changes to GINA::ID
+    .panel-body
+      %p
+        We've recently upgraded the GINA::ID application with a new more secure account management system.
 
-    %p
-      As part of the upgrade your account was automatically migrated and no futher actions are required.
-      If you encounter any problems, please #{mail_to 'support@gina.alaska.edu', 'email us at support@gina.alaska.edu'} and include a description of the problem and what you were attempting to do when the problem occured.
+      %p
+        As part of the upgrade your account was automatically migrated and no futher actions are required.
+        If you encounter any problems, please #{mail_to 'support@gina.alaska.edu', 'email us at support@gina.alaska.edu'} and include a description of the problem and what you were attempting to do when the problem occured.
 
-    .text-right
-      = link_to confirm_migration_user_path(current_user), class: 'btn btn-primary' do
-        Dismiss notice
+      .text-right
+        = link_to confirm_migration_user_path(current_user), class: 'btn btn-primary' do
+          Dismiss notice

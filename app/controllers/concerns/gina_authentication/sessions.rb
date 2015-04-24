@@ -8,12 +8,11 @@ module GinaAuthentication
     end
 
     def create
-      logger.info auth_hash[:extra][:id_info][:openid_id]
       if @auth = Authorization.find_from_hash(auth_hash)
         # Update a user with any new identify information
         # @auth.user.update_from_hash!(auth_hash)
         if signed_in? && @auth.user != current_user
-          flash[:error] = "This identity is already registered with another user account"
+          flash[:error] = "This identity is already registered with another account"
           return redirect_back_or_default('/')
         end
       else
@@ -22,21 +21,24 @@ module GinaAuthentication
         @auth = Authorization.create_from_hash(auth_hash, current_user)
       end
 
+      @auth.user.set_legacy_user!
+
       if @auth.new_user? && @auth.user.legacy_user.nil?
         UserMailer.new_user_notification(@auth.user).deliver_later
         if params[:provider] == 'identity'
-          url = activate_sessions_url(code: @auth.user.activation_code)
+          @auth.user.verify!
+          url = verify_sessions_url(code: @auth.user.activation_code)
           UserMailer.signup_notification(@auth.user, url).deliver_later
+          flash[:notice] = "An email has been sent to #{@auth.user.email} with details on how to activate your account."
         end
-        flash[:success] = "An email has been sent to #{@auth.user.email} with details on how to activate your account."
-      else
-        flash[:success] = "You have been signed in as #{@auth.user.name}"
       end
 
       # Log the authorizing user in.
       signin_user(@auth.user)
 
-      if !current_user.id
+      if signed_in?
+        flash[:success] = "You have been signed in as #{current_user.name}"
+      else
         flash[:error] = "Unable to create your account, if you have logged in previously using a different method please login using that method instead."
       end
 

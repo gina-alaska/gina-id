@@ -1,7 +1,7 @@
 class OmniAuth::Strategies::Identity
   def callback_phase
     # attempt to upgrade credentials
-    upgrade_identity if record.nil?
+    upgrade_identity if record.nil? || !identity
 
     return fail!(:invalid_credentials) unless identity
     super
@@ -21,11 +21,15 @@ class OmniAuth::Strategies::Identity
     Rails.logger.info "Attempting to upgrade user #{request['auth_key']}"
 
     attributes = options[:fields].inject({}){|h,k| h[k] = legacy_user.send(k.to_s); h}
-    @identity = model.new(attributes)
-    @identity.password = request['auth_key']
-    @identity.password_confirmation = request['auth_key']
+    @identity = model.where(attributes).first_or_initialize do |identity|
+      identity.password = request['password']
+      identity.password_confirmation = request['password']
+    end
 
-    unless @identity.save
+    if @identity.save
+      return if legacy_user.user.nil?
+      legacy_user.user.authorizations.where(provider:'identity', uid: @identity.id).first_or_create
+    else
       Rails.logger.info @identity.errors.full_messages
       @identity = nil
     end

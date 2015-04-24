@@ -1,11 +1,12 @@
-.panel.panel-info
-  .panel-heading
-    %h1.panel-title Not sure why you are seeing this page?
-  .panel-body.lead
-    %p
-      If you were attempting access another GINA Service and are seeing this page
-      something interrupted the sign in process.
+- if current_user.verified?
+  .panel.panel-info
+    .panel-heading
+      %h1.panel-title Not sure why you are seeing this page?
+    .panel-body.lead
+      %p
+        If you were attempting access another GINA Service and are seeing this page
+        something interrupted the sign in process.
 
-    %p
-      Please make sure that you are signed into the correct account and trying
-      signing in to the original site again.
+      %p
+        Please make sure that you are signed into the correct account and trying
+        signing in to the original site again.

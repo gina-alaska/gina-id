@@ -19,7 +19,13 @@ module GinaAuthentication
 
     module ClassMethods
       def find_from_hash(hash)
-        where(provider: hash['provider'], uid: hash['uid']).first
+        auth = where(provider: hash['provider'], uid: hash['uid']).first
+
+        if auth.nil? && hash[:extra].try(:[], :id_info)
+          auth = where(provider: hash['provider'], uid: hash[:extra].try(:[], :id_info).try(:[], :openid_id)).first
+        end
+
+        auth
       end
 
       def create_from_hash(hash, user = nil)

@@ -7,6 +7,8 @@ class LegacyUser < ActiveRecord::Base
 
   before_save :encrypt_password
 
+  has_one :user
+
   def encrypt_password
     return if password.blank?
     self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--") if new_record?

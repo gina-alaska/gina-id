@@ -8,10 +8,6 @@
         Hello #{current_user.name}
         %small (Not #{current_user.name}, click #{link_to "here", signout_path})
 
-      - if current_user.legacy_user.present?
-        = render 'user_upgrade_notice'
-
-      - if current_user.verified?
-        = render 'access_gina_services'
-      - else
-        = render 'activation_message'
+      = render 'user_upgrade_notice'
+      = render 'access_gina_services'
+      = render 'activation_message'

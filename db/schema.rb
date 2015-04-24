@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150424184441) do
+ActiveRecord::Schema.define(version: 20150424190154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,7 +92,11 @@ ActiveRecord::Schema.define(version: 20150424184441) do
     t.string   "activation_code"
     t.string   "slug"
     t.boolean  "verified"
+    t.integer  "legacy_user_id"
   end
 
+  add_index "users", ["legacy_user_id"], name: "index_users_on_legacy_user_id", using: :btree
+
   add_foreign_key "approvals", "users"
+  add_foreign_key "users", "legacy_users"
 end

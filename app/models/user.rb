@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   validates :slug, uniqueness: true
   has_many :approvals, dependent: :destroy
+  belongs_to :legacy_user
 
   def slug_candidates
     [
@@ -32,8 +33,17 @@ class User < ActiveRecord::Base
     update_attributes(verified: true, activation_code: nil)
   end
 
-  def legacy_user
-    @legacy_user ||= LegacyUser.where(email: email, active: true).first
+  def set_legacy_user!
+    return unless legacy_user.nil?
+
+    self.legacy_user = LegacyUser.where(email: email, active: true).first
+    save
+
+    if legacy_user
+      authorizations.build(provider: 'google', uid: legacy_user.identity_url)
+      verified!
+    end
+    save
   end
 
   def self.create_from_legacy_user(legacy_user)
