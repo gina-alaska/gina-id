@@ -96,9 +96,9 @@ class ServersController < ApplicationController
       return
     end
 
-    user = User.find(params[:id])
+    user = User.friendly.find(params[:id])
     # content negotiation failed, so just render the user page
-    xrds_url = xrds_server_url(params[:id])
+    xrds_url = user_xrds_server_url(params[:id])
     identity_page = <<EOS
 <html><head>
 <meta http-equiv="X-XRDS-Location" content="#{xrds_url}" />

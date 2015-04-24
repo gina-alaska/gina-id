@@ -1,6 +1,20 @@
 class User < ActiveRecord::Base
   include GinaAuthentication::UserModel
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
+  validates :slug, uniqueness: true
   has_many :approvals, dependent: :destroy
+
+  def slug_candidates
+    [
+      :name,
+      :email,
+      [:id, :name],
+      [:id, :email],
+      [:id, :name, :email]
+    ]
+  end
 
   def guest?
     new_record?
@@ -28,7 +42,10 @@ class User < ActiveRecord::Base
   end
 
   def self.create_from_legacy_user(legacy_user)
-    user = User.create(legacy_user.as_json(only:[:email], methods: [:name]))
+    user = User.build(legacy_user.as_json(only:[:email], methods: [:name]))
+    user.slug = legacy_user.login
+    user.save
+
     identity = Identity.new(user.as_json(only: [:name, :email]))
     p = SecureRandom.hex
     identity.password = p

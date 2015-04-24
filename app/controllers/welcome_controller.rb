@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   def index
     if signed_in?
-      @xrds_url = xrds_server_url(current_user.id)
+      @xrds_url = user_xrds_server_url(current_user)
     else
       @xrds_url = xrds_servers_url
     end

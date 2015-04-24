@@ -87,6 +87,9 @@ module GinaAuthentication
           name: hash['info']['name'],
           email: hash['info']['email']
         }
+        legacy = LegacyUser.where('email ilike :email', email: hash['info']['email']).first
+
+        info.merge!({ slug: legacy.login }) unless legacy.nil?
         info.merge!({ avatar: hash['info']['image'] }) unless hash['info']['image'].blank?
         info
       end

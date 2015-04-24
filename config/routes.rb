@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   #open id server routes
   resources :servers, path: :openid, except: [:new, :edit, :update, :destroy] do
     get :xrds, on: :collection
-    get :xrds, on: :member
+    get :user_xrds, on: :member
     post :decision, on: :collection
   end
   resources :users do
@@ -31,6 +31,9 @@ Rails.application.routes.draw do
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+
+  get ':id' => 'servers#show', :constraints => { :id => /.+/ }, :as => :user_identity
+  get ':id/xrds' => 'servers#user_xrds'
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'

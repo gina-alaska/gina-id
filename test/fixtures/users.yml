@@ -4,8 +4,10 @@ one:
   name: MyString
   email: test@test.com
   avatar: MyString
+  slug: wombat
 
 two:
   name: MyString
   email: MyString
   avatar: MyString
+  slug: weasel

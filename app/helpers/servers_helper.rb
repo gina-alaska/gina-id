@@ -1,5 +1,5 @@
 module ServersHelper
   def url_for_user
-    server_url(current_user.id)
+    user_identity_url(current_user.slug)
   end
 end
