@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   end
 
   def self.create_from_legacy_user(legacy_user)
-    user = User.build(legacy_user.as_json(only:[:email], methods: [:name]))
+    user = User.new(legacy_user.as_json(only:[:email], methods: [:name]))
     user.slug = legacy_user.login
     user.save
 
