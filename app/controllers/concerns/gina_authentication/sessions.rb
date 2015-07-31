@@ -30,6 +30,8 @@ module GinaAuthentication
           url = verify_sessions_url(code: @auth.user.activation_code)
           UserMailer.signup_notification(@auth.user, url).deliver_later
           flash[:notice] = "An email has been sent to #{@auth.user.email} with details on how to activate your account."
+        else
+          @auth.user.verified!
         end
       end
 
