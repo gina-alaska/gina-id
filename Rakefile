@@ -3,4 +3,7 @@
 
 require File.expand_path('../config/application', __FILE__)
 
+require 'rake/version_task'
+Rake::VersionTask.new
+
 Rails.application.load_tasks
