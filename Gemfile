@@ -4,7 +4,7 @@ gem 'bundler', '>= 1.8.4'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
-  gem 'rails-assets-font-awesome'
+  gem 'rails-assets-font-awesome', '~> 4.3.0'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -63,7 +63,7 @@ gem 'stamp'
 
 gem 'omniauth'
 gem 'omniauth-github'
-gem 'omniauth-google-oauth2', github: 'zquestz/omniauth-google-oauth2'
+gem 'omniauth-google-oauth2'
 gem 'omniauth-openid'
 gem 'omniauth-identity'
 gem 'google-api-client'
