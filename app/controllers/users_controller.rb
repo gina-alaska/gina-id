@@ -11,6 +11,18 @@ class UsersController < ApplicationController
   def forgot_password
   end
 
+  def send_confirmation_email
+    if !current_user.verified?
+      current_user.verify!
+      url = verify_sessions_url(code: current_user.activation_code)
+      UserMailer.email_confirmation(current_user, url).deliver_later
+      flash[:notice] = "Confirmation email has been sent to #{current_user.email}"
+    else
+      flash[:notice] = "Your account has already been verified"
+    end
+    redirect_to users_path
+  end
+
   def send_reset_instructions
     @user = User.where('email ilike :email', email: params[:email]).first
 

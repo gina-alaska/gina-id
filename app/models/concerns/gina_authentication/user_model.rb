@@ -78,7 +78,7 @@ module GinaAuthentication
 
     module ClassMethods
       def create_from_hash!(hash)
-        user = create(params_from_hash(hash))
+        user = create!(params_from_hash(hash))
         user
       end
 

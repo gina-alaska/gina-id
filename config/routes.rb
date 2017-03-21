@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     collection do
       get :forgot_password
       post :send_reset_instructions
+      get :send_confirmation_email
       get :reset_password
     end
   end

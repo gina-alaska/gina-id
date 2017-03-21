@@ -18,7 +18,12 @@ module GinaAuthentication
       else
         # Create a new user or add an auth to existing user, depending on
         # whether there is already a user signed in.
-        @auth = Authorization.create_from_hash(auth_hash, current_user)
+        begin
+          @auth = Authorization.create_from_hash(auth_hash, current_user)
+        rescue ActiveRecord::RecordInvalid => e
+          flash[:error] = "This email is already registered with another login method.  Please login using the other method."
+          return redirect_back_or_default('/')
+        end
       end
 
       @auth.user.set_legacy_user!
