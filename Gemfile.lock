@@ -277,7 +277,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   bootstrap_form
-  bundler (>= 1.8.4)
+  bundler (>= 1.8.4, < 2.0)
   byebug
   coffee-rails (~> 4.1.0)
   dotenv-rails
