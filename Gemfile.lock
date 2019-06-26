@@ -202,8 +202,10 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.11.1)
       sprockets-rails
-    rails-assets-bootstrap (4.3.1)
+    rails-assets-bootstrap (3.3.7)
+      rails-assets-jquery (>= 1.9.1, < 4)
     rails-assets-font-awesome (4.3.0)
+    rails-assets-jquery (3.4.1)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.9)
@@ -303,12 +305,12 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-identity
   omniauth-openid
-  pg
+  pg (~> 0.21.0)
   pry
   puma
   quiet_assets
   rails (= 4.2.11.1)
-  rails-assets-bootstrap!
+  rails-assets-bootstrap (~> 3.3.5)!
   rails-assets-font-awesome (~> 4.3.0)!
   ruby-openid
   sass-rails (~> 5.0)

@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'bundler', '1.17.3'
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-bootstrap', '~> 3.3.5'
   gem 'rails-assets-font-awesome', '~> 4.3.0'
 end
 
@@ -70,7 +70,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-openid'
 gem 'omniauth-identity'
 gem 'google-api-client'
-gem 'bootstrap_form', '2.3.0'
+gem 'bootstrap_form'
 gem 'jquery-turbolinks'
 gem 'ruby-openid'
 gem 'friendly_id', '~> 5.1.0'
